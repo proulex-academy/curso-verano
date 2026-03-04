@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Proulex Academy</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<style>
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    background-color: #000814;
+    color: white;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .glow {
+    text-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
+  }
+
+  .topic-card {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .topic-content {
+    transition: all 0.3s ease;
+  }
+  
+  .topic-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 255, 255, 0.7);
+    box-shadow: 0 10px 30px -5px rgba(0, 255, 255, 0.4);
+  }
+
+  .topic-card:hover .topic-content {
+    transform: scale(1.1);
+    text-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff;
+    color: #ffffff;
+  }
+
+  /* ==================================
+     ANIMACIONES DE ÓRBITA (NEUTRONES)
+  ================================== */
+  .orbit-container {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+  }
+
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    transform-style: preserve-3d;
+  }
+
+  .neutron {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+  }
+
+  .ring-1 { width: 130%; height: 130%; border: 2px solid rgba(0, 255, 255, 0.3); animation: spin1 8s linear infinite; }
+  .ring-1 .neutron { background: #00ffff; box-shadow: 0 0 15px #00ffff; top: -7px; left: 50%; transform: translateX(-50%); }
+
+  .ring-2 { width: 160%; height: 160%; border: 2px dashed rgba(168, 85, 247, 0.4); animation: spin2 12s linear infinite; }
+  .ring-2 .neutron { background: #a855f7; box-shadow: 0 0 15px #a855f7; bottom: -7px; left: 50%; transform: translateX(-50%); }
+
+  .ring-3 { width: 190%; height: 190%; border: 1px solid rgba(0, 255, 255, 0.15); animation: spin3 18s linear infinite; }
+  .ring-3 .neutron { background: #3b82f6; box-shadow: 0 0 15px #3b82f6; left: -7px; top: 50%; transform: translateY(-50%); }
+
+  @keyframes spin1 { 0% { transform: rotateX(65deg) rotateY(15deg) rotateZ(0deg); } 100% { transform: rotateX(65deg) rotateY(15deg) rotateZ(360deg); } }
+  @keyframes spin2 { 0% { transform: rotateX(75deg) rotateY(-25deg) rotateZ(360deg); } 100% { transform: rotateX(75deg) rotateY(-25deg) rotateZ(0deg); } }
+  @keyframes spin3 { 0% { transform: rotateX(50deg) rotateY(45deg) rotateZ(0deg); } 100% { transform: rotateX(50deg) rotateY(45deg) rotateZ(360deg); } }
+
+  /* ==================================
+     CLASES PARA ANIMACIÓN FADE-IN EN SCROLL
+  ================================== */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .fade-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Delays para efecto cascada */
+  .delay-100 { transition-delay: 100ms; }
+  .delay-200 { transition-delay: 200ms; }
+  .delay-300 { transition-delay: 300ms; }
+  .delay-400 { transition-delay: 400ms; }
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="Proulex_Academy_Sonido.mp3" type="audio/mpeg">
+</audio>
+
+<button id="audioControl" class="fixed bottom-6 right-6 z-50 bg-black/80 border border-cyan-500 text-cyan-400 p-3 rounded-full hover:bg-cyan-900 hover:scale-110 transition-all shadow-[0_0_15px_rgba(0,255,255,0.3)]">
+  🔊 Conectando Audio...
+</button>
+
+<section class="flex flex-col items-center justify-center text-center px-4 pt-20 pb-8 fade-up is-visible">
+  <img src="PLX.png" alt="Logo Proulex" class="w-96 mb-8 animate-pulse" />
+  
+  <h1 class="text-4xl md:text-6xl font-bold glow max-w-4xl">
+    Curso de Verano 2026
+  </h1>
+    <h1 class="text-4xl md:text-6xl font-bold glow max-w-4xl">
+    Proulex Academy
+  </h1>
+
+  <h2 class="text-2xl md:text-3xl mt-6 text-cyan-400 font-light tracking-widest">
+    Programar jugando: IA + Vibe Coding
+  </h2>
+
+  <div class="mt-10 bg-gradient-to-r from-cyan-900/30 via-purple-900/30 to-cyan-900/30 border border-cyan-500/40 p-6 rounded-2xl max-w-3xl backdrop-blur-sm shadow-[0_0_20px_rgba(0,255,255,0.1)]">
+    <p class="text-lg md:text-xl text-gray-200 leading-relaxed font-medium">
+      <span class="text-cyan-400 font-bold uppercase tracking-wider block mb-2">🚀 Dirigido a:</span>
+      Estudiantes de <strong class="text-white glow">8 a 16 años</strong> con deseos de aprender y con ganas de programar sus propios juegos de manera divertida.
+    </p>
+  </div>
+</section>
+
+<section class="flex justify-center w-full px-4 mt-8 mb-24 relative z-10 fade-up delay-200 is-visible">
+  <div class="orbit-container w-48 h-48 md:w-64 md:h-64 mt-10">
+    <div class="ring ring-1"><div class="neutron"></div></div>
+    <div class="ring ring-2"><div class="neutron"></div></div>
+    <div class="ring ring-3"><div class="neutron"></div></div>
+    <img src="PLX Academy.png" alt="PLX Academy" class="relative z-10 w-full h-full rounded-full object-cover drop-shadow-[0_0_35px_rgba(0,255,255,0.8)] hover:scale-110 transition-transform duration-500" />
+  </div>
+</section>
+
+<section class="flex flex-col items-center px-4 py-8 relative z-10 overflow-hidden">
+  <h2 class="text-4xl font-bold mb-10 glow fade-up">Temas del Curso</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl w-full">
+    <div class="topic-card p-8 rounded-2xl text-center fade-up delay-100">
+      <div class="topic-content">
+        <h3 class="text-2xl font-bold text-cyan-400 mb-3">Vibe Coding</h3>
+        <p class="text-gray-200 text-lg mb-4">Imagina y crea proyectos con IA.</p>
+      </div>
+      <span class="inline-block bg-cyan-900 text-cyan-200 text-xs px-3 py-1 rounded-full border border-cyan-700 font-mono mt-auto self-center">
+        ChatGPT + Gemini + Creatividad
+      </span>
+    </div>
+
+    <div class="topic-card p-8 rounded-2xl text-center fade-up delay-200">
+      <div class="topic-content">
+        <h3 class="text-2xl font-bold text-cyan-400 mb-3">Prompts</h3>
+        <p class="text-gray-200 text-lg mb-4">Ingeniería de prompts para desarrollo de apps.</p>
+      </div>
+      <span class="inline-block bg-cyan-900 text-cyan-200 text-xs px-3 py-1 rounded-full border border-cyan-700 font-mono mt-auto self-center">
+        IA Generativa
+      </span>
+    </div>
+
+    <div class="topic-card p-8 rounded-2xl text-center fade-up delay-300">
+      <div class="topic-content">
+        <h3 class="text-2xl font-bold text-cyan-400 mb-3">3D y Animación</h3>
+        <p class="text-gray-200 text-lg mb-4">Creación de figuras y animaciones en la web.</p>
+      </div>
+      <span class="inline-block bg-cyan-900 text-cyan-200 text-xs px-3 py-1 rounded-full border border-cyan-700 font-mono mt-auto self-center">
+        Three.js + Tailwind
+      </span>
+    </div>
+
+    <div class="topic-card p-8 rounded-2xl text-center fade-up delay-400">
+      <div class="topic-content">
+        <h3 class="text-2xl font-bold text-cyan-400 mb-3">Juegos Web</h3>
+        <p class="text-gray-200 text-lg mb-4">Desarrollo de juegos interactivos modernos.</p>
+      </div>
+      <span class="inline-block bg-cyan-900 text-cyan-200 text-xs px-3 py-1 rounded-full border border-cyan-700 font-mono mt-auto self-center">
+        HTML5 + CSS3 + JavaScript
+      </span>
+    </div>
+  </div>
+</section>
+
+<section class="flex flex-col items-center px-4 py-8 relative z-10 fade-up">
+  <h2 class="text-3xl font-bold mb-8 glow">Tecnologías</h2>
+  <div class="flex flex-wrap justify-center gap-6 text-cyan-400 text-xl font-medium max-w-4xl bg-black/40 py-4 px-8 rounded-full border border-cyan-900/50">
+    <span class="hover:text-white hover:scale-110 hover:drop-shadow-[0_0_10px_#00ffff] transition-all cursor-default">ChatGPT</span>
+    <span class="hover:text-white hover:scale-110 hover:drop-shadow-[0_0_10px_#00ffff] transition-all cursor-default">Gemini</span>
+    <span class="hover:text-white hover:scale-110 hover:drop-shadow-[0_0_10px_#00ffff] transition-all cursor-default">VS Code</span>
+    <span class="hover:text-white hover:scale-110 hover:drop-shadow-[0_0_10px_#00ffff] transition-all cursor-default">HTML5</span>
+    <span class="hover:text-white hover:scale-110 hover:drop-shadow-[0_0_10px_#00ffff] transition-all cursor-default">CSS3</span>
+    <span class="hover:text-white hover:scale-110 hover:drop-shadow-[0_0_10px_#00ffff] transition-all cursor-default">JavaScript</span>
+    <span class="hover:text-white hover:scale-110 hover:drop-shadow-[0_0_10px_#00ffff] transition-all cursor-default">Tailwind</span>
+    <span class="hover:text-white hover:scale-110 hover:drop-shadow-[0_0_10px_#00ffff] transition-all cursor-default">Three.js</span>
+  </div>
+</section>
+
+<section class="flex flex-col items-center px-4 pt-12 pb-24 relative z-10 overflow-hidden">
+  <h2 class="text-3xl md:text-4xl font-bold mb-10 glow text-center fade-up">Principales prácticas y proyectos</h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl w-full">
+    <div class="bg-gradient-to-b from-black/80 to-black/40 border border-cyan-600/30 p-8 rounded-xl hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,255,255,0.2)] transition-all flex flex-col items-center text-center group fade-up delay-100">
+      <div class="text-4xl mb-4 group-hover:scale-125 transition-transform">🎮</div>
+      <h3 class="text-xl text-cyan-300 font-bold mb-2">Juegos interactivos 2D</h3>
+      <p class="text-gray-400">Creación de juegos funcionales y dinámicos ejecutandose directamente en el navegador.</p>
+    </div>
+
+    <div class="bg-gradient-to-b from-black/80 to-black/40 border border-cyan-600/30 p-8 rounded-xl hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,255,255,0.2)] transition-all flex flex-col items-center text-center group fade-up delay-200">
+      <div class="text-4xl mb-4 group-hover:scale-125 transition-transform">👾</div>
+      <h3 class="text-xl text-cyan-300 font-bold mb-2">Mascota virtual</h3>
+      <p class="text-gray-400">Desarrollo del sentido de responsabilidad mediante programación de mascotas con necesidades digitales.</p>
+    </div>
+
+    <div class="bg-gradient-to-b from-black/80 to-black/40 border border-cyan-600/30 p-8 rounded-xl hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,255,255,0.2)] transition-all flex flex-col items-center text-center group fade-up delay-300">
+      <div class="text-4xl mb-4 group-hover:scale-125 transition-transform">🧠</div>
+      <h3 class="text-xl text-cyan-300 font-bold mb-2">Apps web educativas</h3>
+      <p class="text-gray-400">Construcción de herramientas útiles que faciliten el aprendizaje en diversas materias.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ============================
+   CONTROL DE AUDIO ROBUSTO
+============================ */
+const bgMusic = document.getElementById("bgMusic");
+const audioControl = document.getElementById("audioControl");
+let isPlaying = false;
+
+bgMusic.volume = 0.3; // Volumen suave
+
+function updateAudioUI(playing) {
+  isPlaying = playing;
+  if (playing) {
+    audioControl.innerHTML = "🔊 Sonido Activado";
+    audioControl.classList.remove("text-cyan-400", "bg-black/80");
+    audioControl.classList.add("text-white", "bg-cyan-900");
+  } else {
+    audioControl.innerHTML = "🔇 Activar Sonido";
+    audioControl.classList.remove("text-white", "bg-cyan-900");
+    audioControl.classList.add("text-cyan-400", "bg-black/80");
+  }
+}
+
+// Intentar reproducir automáticamente (con manejo de errores)
+function tryPlayAudio() {
+  const playPromise = bgMusic.play();
+  if (playPromise !== undefined) {
+    playPromise.then(() => {
+      updateAudioUI(true);
+    }).catch(error => {
+      updateAudioUI(false);
+      console.warn("Autoplay bloqueado o archivo no encontrado:", error);
+    });
+  }
+}
+
+// Iniciar al cargar
+tryPlayAudio();
+
+// Control manual del botón
+audioControl.addEventListener("click", () => {
+  if (isPlaying) {
+    bgMusic.pause();
+    updateAudioUI(false);
+  } else {
+    const playPromise = bgMusic.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        updateAudioUI(true);
+      }).catch(error => {
+        alert("🚨 No se pudo cargar el audio. Asegúrate de que el archivo 'Proulex Academy Sonido.mp3' esté en la misma carpeta que tu archivo HTML.");
+        updateAudioUI(false);
+      });
+    }
+  }
+});
+
+// Forzar activación al primer clic en la pantalla si estaba bloqueado
+window.addEventListener('click', () => {
+  if(!isPlaying) { tryPlayAudio(); }
+}, { once: true });
+
+
+/* ============================
+   ANIMACIÓN FADE-IN EN SCROLL (IntersectionObserver)
+============================ */
+document.addEventListener("DOMContentLoaded", () => {
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.15
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target); 
+      }
+    });
+  }, observerOptions);
+
+  const fadeElements = document.querySelectorAll('.fade-up');
+  fadeElements.forEach(el => observer.observe(el));
+});
+
+
+/* ============================
+   THREE.JS FONDO DE PARTÍCULAS
+============================ */
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.domElement.style.position = 'fixed';
+renderer.domElement.style.top = '0';
+renderer.domElement.style.zIndex = '-1';
+document.body.appendChild(renderer.domElement);
+
+camera.position.z = 8;
+
+const particlesGeometry = new THREE.BufferGeometry();
+const particlesCount = 1500; 
+const posArray = new Float32Array(particlesCount * 3);
+
+for (let i = 0; i < particlesCount * 3; i++) {
+  posArray[i] = (Math.random() - 0.5) * 25; 
+}
+
+particlesGeometry.setAttribute("position", new THREE.BufferAttribute(posArray, 3));
+
+const particlesMaterial = new THREE.PointsMaterial({
+  size: 0.025,
+  color: 0x00ffff,
+  transparent: true,
+  opacity: 0.7,
+  blending: THREE.AdditiveBlending 
+});
+
+const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+scene.add(particlesMesh);
+
+function animate() {
+  requestAnimationFrame(animate);
+  particlesMesh.rotation.y += 0.0003;
+  particlesMesh.rotation.x += 0.0001;
+  renderer.render(scene, camera);
+}
+animate();
+
+window.addEventListener("resize", () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+
+</body>
+</html>
