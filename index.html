@@ -5,10 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Proulex Academy - Curso verano 2026</title>
 
-<!-- TailwindCSS CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Three.js CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <style>
@@ -30,6 +28,10 @@
 
   .glow {
     text-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
+  }
+
+  .glow-green {
+    text-shadow: 0 0 15px #00ff66, 0 0 25px #00ff66;
   }
 
   .topic-card {
@@ -116,23 +118,20 @@
 
 <body>
 
-<!-- AUDIO -->
 <audio id="bgMusic" loop>
   <source src="Proulex_Academy_Sonido.mp3" type="audio/mpeg">
 </audio>
 
-<!-- BOTÓN DE SONIDO (Movido a la parte superior derecha) -->
 <button id="audioControl" class="fixed top-4 right-4 md:top-6 md:right-6 z-50 bg-black/80 border border-cyan-500 text-cyan-400 p-3 rounded-full hover:bg-cyan-900 hover:scale-110 transition-all shadow-[0_0_15px_rgba(0,255,255,0.3)]">
   🔊 Conectando Audio...
 </button>
 
-<!-- SECCIÓN DE INFORMES E INSCRIPCIONES (Movida a la parte superior) -->
 <header class="w-full border-b border-cyan-900/50 bg-black/60 backdrop-blur-lg pt-24 md:pt-12 pb-10 mb-8 relative z-40 fade-up is-visible">
-  <div class="max-w-5xl mx-auto px-4 flex flex-col items-center">
+  <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
     
     <h2 class="text-2xl font-bold text-cyan-400 mb-8 glow text-center">Inscripciones e informes</h2>
     
-    <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 w-full">
+    <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10 lg:gap-12 w-full">
       
       <a href="https://wa.me/523330117623" target="_blank" rel="noopener noreferrer"
         class="flex items-center gap-3 text-gray-300 hover:text-green-400 hover:scale-105 transition-all group">
@@ -141,7 +140,7 @@
                     flex items-center justify-center transition-all">
           <img src="whatsapp.png" alt="WhatsApp" class="w-6 h-6 object-contain">
         </div>
-        <span class="text-lg font-medium tracking-wide">3330117623</span>
+        <span class="text-sm md:text-base font-medium leading-tight">3330117623</span>
       </a>
 
       <a href="tel:+523336162416" class="flex items-center gap-3 text-gray-300 hover:text-cyan-300 hover:scale-105 transition-all group">
@@ -150,7 +149,7 @@
                     flex items-center justify-center transition-all">
           <span class="text-2xl">📞</span>
         </div>
-        <span class="text-lg font-medium tracking-wide">3336162416</span>
+        <span class="text-sm md:text-base font-medium leading-tight">3336162416</span>
       </a>
 
       <a href="https://maps.app.goo.gl/ACmms4isoEypp7c36" target="_blank" rel="noopener noreferrer"
@@ -160,11 +159,36 @@
                     flex items-center justify-center transition-all text-2xl">
           📍
         </div>
-        <span class="text-sm md:text-base font-medium leading-tight">
+        <span class="text-xs md:text-sm font-medium leading-tight">
           Justo Sierra #2439.<br/>
           Guadalajara, Jalisco México.
         </span>
       </a>
+
+      <a href="https://www.tiktok.com/@plx.academy.escuel" target="_blank" rel="noopener noreferrer"
+        class="flex items-center gap-3 text-gray-300 hover:text-cyan-400 hover:scale-105 transition-all group text-left">
+        <div class="bg-black/50 w-12 h-12 rounded-full border border-cyan-500/30 
+                    group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.5)] 
+                    flex items-center justify-center transition-all">
+          <img src="tiktok.png" alt="TikTok" class="w-6 h-6 object-contain">
+        </div>
+        <span class="text-sm md:text-base font-medium leading-tight">
+          TikTok
+        </span>
+      </a>
+
+      <a href="https://www.facebook.com/proulexacademy" target="_blank" rel="noopener noreferrer"
+        class="flex items-center gap-3 text-gray-300 hover:text-blue-500 hover:scale-105 transition-all group text-left">
+        <div class="bg-black/50 w-12 h-12 rounded-full border border-blue-500/30 
+                    group-hover:border-blue-500 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] 
+                    flex items-center justify-center transition-all">
+          <img src="Facebook.png" alt="Facebook" class="w-6 h-6 object-contain">
+        </div>
+        <span class="text-sm md:text-base font-medium leading-tight">
+          Facebook
+        </span>
+      </a>
+      
 
       <a href="https://academy.proulex.com/" target="_blank" rel="noopener noreferrer"
         class="flex items-center gap-3 text-gray-300 hover:text-fuchsia-400 hover:scale-105 transition-all group text-left">
@@ -178,7 +202,6 @@
           Conoce todos nuestros cursos<br/>
         </span>
       </a>
-      
     </div>
   </div>
 </header>
@@ -189,11 +212,11 @@
   <h1 class="text-4xl md:text-6xl font-bold glow max-w-4xl">
     Curso de Verano 2026
   </h1>
-    <h1 class="text-4xl md:text-6xl font-bold glow max-w-4xl mt-2">
+  <h1 class="text-4xl md:text-6xl font-bold glow max-w-4xl mt-2">
     Proulex Academy
   </h1>
 
-  <h2 class="text-2xl md:text-3xl mt-6 text-cyan-400 font-light tracking-widest">
+  <h2 class="text-2xl md:text-3xl mt-6 text-cyan-400 font-light tracking-widest uppercase">
     Programar jugando: IA + Vibe Coding
   </h2>
 
@@ -201,49 +224,43 @@
     Duración: Del 06 al 24 de Julio
   </h3>
 
-  <!-- SECCIÓN DIVIDIDA EN DOS BLOQUES INTERACTIVOS (ENLACES A PDF) -->
+  <div class="mt-6 bg-green-950/40 border-2 border-green-500/50 p-6 rounded-2xl max-w-xl w-full backdrop-blur-md shadow-[0_0_20px_rgba(0,255,102,0.15)] text-center transition-all duration-300 hover:shadow-[0_0_35px_rgba(0,255,102,0.4)] hover:border-green-400">
+    <h4 class="text-green-400 font-black uppercase tracking-widest text-lg mb-3 glow-green">⚽ Precios e Inversión</h4>
+    <div class="space-y-2 text-base md:text-lg font-semibold text-gray-200">
+      <p>Precio general: <span class="text-white text-xl">$3,960.00</span></p>
+      <p class="text-green-400">Precio pronto pago: <span class="text-white text-xl glow-green">$3,366.00</span> <span class="text-xs bg-green-500 text-black px-2 py-0.5 rounded-full ml-1 font-bold">15% OFF</span></p>
+      <p class="text-sm text-gray-400 font-normal mt-2 border-t border-green-900/50 pt-2">Vigencia de pronto pago: <span class="text-amber-400 font-bold">30 de Junio de 2026</span></p>
+    </div>
+  </div>
+
   <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl w-full">
     
     <a href="verano7a10.pdf" target="_blank" rel="noopener noreferrer" class="group bg-gradient-to-br from-cyan-900/40 to-black/60 border-2 border-cyan-500/50 p-8 rounded-2xl backdrop-blur-md shadow-[0_0_20px_rgba(0,255,255,0.15)] hover:border-cyan-300 hover:shadow-[0_0_40px_rgba(0,255,255,0.4),inset_0_0_20px_rgba(0,255,255,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col text-left cursor-pointer relative overflow-hidden">
-      <div class="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0 text-3xl">
-        📄
-      </div>
-      
+      <div class="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0 text-3xl">📄</div>
       <h3 class="text-cyan-400 font-bold uppercase tracking-widest block mb-4 text-center md:text-left text-2xl glow">🚀 7 a 10 años</h3>
-      
       <p class="text-base md:text-lg text-gray-200 leading-relaxed font-medium text-center md:text-left z-10 flex-grow">
-        Dirigido a niñas y niños curiosos con ganas de aprender de forma dinámica y divertida. Durante el curso crearán juegos interactivos, una mascota virtual y pequeñas aplicaciones web educativas, mediante actividades prácticas, sencillas y proyectos diseñados especialmente para su edad, fomentando su creatividad y pensamiento lógico.
+        Dirigido a niñas y niños curiosos con ganas de aprender de forma dinámica y divertida. Durante el curso crearán juegos interactivos, una mascota deportiva virtual y pequeñas aplicaciones web educativas, mediante actividades prácticas, sencillas y proyectos diseñados especialmente para su edad, fomentando su creatividad y pensamiento lógico.
       </p>
-      
       <div class="mt-6 pt-4 border-t border-cyan-800/50 text-center md:text-left">
-        <span class="inline-block text-cyan-300 font-semibold text-sm uppercase tracking-wider group-hover:text-white group-hover:glow transition-all">
-          👉 Clic para abrir temario PDF
-        </span>
+        <span class="inline-block text-cyan-300 font-semibold text-sm uppercase tracking-wider group-hover:text-white group-hover:glow transition-all">👉 Clic para abrir temario PDF</span>
       </div>
     </a>
 
     <a href="verano11a16.pdf" target="_blank" rel="noopener noreferrer" class="group bg-gradient-to-bl from-cyan-900/40 to-black/60 border-2 border-cyan-500/50 p-8 rounded-2xl backdrop-blur-md shadow-[0_0_20px_rgba(0,255,255,0.15)] hover:border-cyan-300 hover:shadow-[0_0_40px_rgba(0,255,255,0.4),inset_0_0_20px_rgba(0,255,255,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col text-left cursor-pointer relative overflow-hidden">
-      <div class="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-x-4 group-hover:translate-x-0 text-3xl">
-        📄
-      </div>
-      
+      <div class="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-x-4 group-hover:translate-x-0 text-3xl">📄</div>
       <h3 class="text-cyan-400 font-bold uppercase tracking-widest block mb-4 text-center md:text-left text-2xl glow">🚀 11 a 16 años</h3>
-      
       <p class="text-base md:text-lg text-gray-200 leading-relaxed font-medium text-center md:text-left z-10 flex-grow">
-        Enfocado en jóvenes interesados en aprender a programar y desarrollar sus propias ideas. A lo largo del curso crearán juegos interactivos, una mascota virtual y aplicaciones web educativas, a través de retos, prácticas y proyectos adaptados a su nivel, fortaleciendo sus habilidades mientras se divierten y construyen proyectos reales.
+        Enfocado en jóvenes interesados en aprender a programar y desarrollar sus propias ideas. A lo largo del curso crearán juegos interactivos, una mascota deportiva virtual y aplicaciones web educativas, a través de retos, prácticas y proyectos adaptados a su nivel, fortaleciendo sus habilidades mientras se divierten y construyen proyectos reales.
       </p>
-
       <div class="mt-6 pt-4 border-t border-cyan-800/50 text-center md:text-left">
-        <span class="inline-block text-cyan-300 font-semibold text-sm uppercase tracking-wider group-hover:text-white group-hover:glow transition-all">
-          👉 Clic para abrir temario PDF
-        </span>
+        <span class="inline-block text-cyan-300 font-semibold text-sm uppercase tracking-wider group-hover:text-white group-hover:glow transition-all">👉 Clic para abrir temario PDF</span>
       </div>
     </a>
 
   </div>
 </section>
 
-<section class="flex justify-center w-full px-4 mt-8 mb-24 relative z-10 fade-up delay-200 is-visible">
+<section class="flex justify-center w-full px-4 mt-8 mb-16 relative z-10 fade-up delay-200 is-visible">
   <div class="orbit-container w-48 h-48 md:w-64 md:h-64 mt-10">
     <div class="ring ring-1"><div class="neutron"></div></div>
     <div class="ring ring-2"><div class="neutron"></div></div>
@@ -252,14 +269,55 @@
   </div>
 </section>
 
-<section class="flex flex-col items-center px-4 py-8 relative z-10 overflow-hidden">
+<section class="flex flex-col items-center px-4 py-12 max-w-5xl mx-auto w-full relative z-10 fade-up">
+  <h2 class="text-3xl font-bold mb-8 glow text-center">Explora el Universo del Curso</h2>
+  
+  <div class="relative w-full h-72 sm:h-96 md:h-[500px] rounded-3xl overflow-hidden border border-cyan-500/30 shadow-[0_0_35px_rgba(0,255,255,0.15)] bg-black group/carousel">
+    
+    <div class="carousel-slide absolute inset-0 opacity-100 transition-opacity duration-1000 select-none flex items-center justify-center">
+      <img src="1.jpeg" class="absolute inset-0 w-full h-full object-cover filter blur-xl opacity-30 pointer-events-none scale-110">
+      <img src="1.jpeg" alt="Galería 1" class="relative z-10 max-w-full max-h-full object-contain object-center transform scale-100 hover:scale-105 transition-transform duration-700">
+    </div>
+
+    <div class="carousel-slide absolute inset-0 opacity-0 transition-opacity duration-1000 select-none pointer-events-none flex items-center justify-center">
+      <img src="2.jpeg" class="absolute inset-0 w-full h-full object-cover filter blur-xl opacity-30 pointer-events-none scale-110">
+      <img src="2.jpeg" alt="Galería 2" class="relative z-10 max-w-full max-h-full object-contain object-center transform scale-100 hover:scale-105 transition-transform duration-700">
+    </div>
+
+    <div class="carousel-slide absolute inset-0 opacity-0 transition-opacity duration-1000 select-none pointer-events-none flex items-center justify-center">
+      <img src="3.jpeg" class="absolute inset-0 w-full h-full object-cover filter blur-xl opacity-30 pointer-events-none scale-110">
+      <img src="3.jpeg" alt="Galería 3" class="relative z-10 max-w-full max-h-full object-contain object-center transform scale-100 hover:scale-105 transition-transform duration-700">
+    </div>
+
+    <div class="carousel-slide absolute inset-0 opacity-0 transition-opacity duration-1000 select-none pointer-events-none flex items-center justify-center">
+      <img src="4.jpeg" class="absolute inset-0 w-full h-full object-cover filter blur-xl opacity-30 pointer-events-none scale-110">
+      <img src="4.jpeg" alt="Galería 4" class="relative z-10 max-w-full max-h-full object-contain object-center transform scale-100 hover:scale-105 transition-transform duration-700">
+    </div>
+
+    <button id="prevBtn" class="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-black/70 border border-cyan-500/40 text-cyan-400 w-12 h-12 rounded-full flex items-center justify-center text-xl md:opacity-0 group-hover/carousel:opacity-100 hover:bg-cyan-900 hover:border-cyan-400 hover:scale-110 active:scale-95 transition-all duration-300 shadow-[0_0_15px_rgba(0,255,255,0.2)]">
+      ❮
+    </button>
+    <button id="nextBtn" class="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-black/70 border border-cyan-500/40 text-cyan-400 w-12 h-12 rounded-full flex items-center justify-center text-xl md:opacity-0 group-hover/carousel:opacity-100 hover:bg-cyan-900 hover:border-cyan-400 hover:scale-110 active:scale-95 transition-all duration-300 shadow-[0_0_15px_rgba(0,255,255,0.2)]">
+      ❯
+    </button>
+
+    <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-3 z-30 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
+      <button class="carousel-dot w-3 h-3 rounded-full bg-white transition-all duration-300 cursor-pointer hover:scale-125 focus:outline-none" aria-label="Slide 1"></button>
+      <button class="carousel-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 cursor-pointer hover:scale-125 focus:outline-none" aria-label="Slide 2"></button>
+      <button class="carousel-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 cursor-pointer hover:scale-125 focus:outline-none" aria-label="Slide 3"></button>
+      <button class="carousel-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 cursor-pointer hover:scale-125 focus:outline-none" aria-label="Slide 4"></button>
+    </div>
+  </div>
+</section>
+
+<section class="flex flex-col items-center px-4 py-12 relative z-10 overflow-hidden">
   <h2 class="text-4xl font-bold mb-10 glow fade-up">Temas del Curso</h2>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl w-full">
     <div class="topic-card p-8 rounded-2xl text-center fade-up delay-100">
       <div class="topic-content">
         <h3 class="text-2xl font-bold text-cyan-400 mb-3">Vibe Coding</h3>
-        <p class="text-gray-200 text-lg mb-4">Imagina y crea proyectos con IA.</p>
+        <p class="text-gray-200 text-lg mb-4">Imagina, diseña y programación con herramientas de IA.</p>
       </div>
       <span class="inline-block bg-cyan-900 text-cyan-200 text-xs px-3 py-1 rounded-full border border-cyan-700 font-mono mt-auto self-center">
         ChatGPT + Gemini + Creatividad
@@ -269,7 +327,7 @@
     <div class="topic-card p-8 rounded-2xl text-center fade-up delay-200">
       <div class="topic-content">
         <h3 class="text-2xl font-bold text-cyan-400 mb-3">Prompts</h3>
-        <p class="text-gray-200 text-lg mb-4">Ingeniería de prompts para desarrollo de apps.</p>
+        <p class="text-gray-200 text-lg mb-4">Ingeniería de prompts para desarrollo de apps y algoritmos.</p>
       </div>
       <span class="inline-block bg-cyan-900 text-cyan-200 text-xs px-3 py-1 rounded-full border border-cyan-700 font-mono mt-auto self-center">
         IA Generativa
@@ -279,17 +337,17 @@
     <div class="topic-card p-8 rounded-2xl text-center fade-up delay-300">
       <div class="topic-content">
         <h3 class="text-2xl font-bold text-cyan-400 mb-3">3D y Animación</h3>
-        <p class="text-gray-200 text-lg mb-4">Creación de figuras y animaciones en la web.</p>
+        <p class="text-gray-200 text-lg mb-4">Creación, renderizado de imagenes y videos.</p>
       </div>
       <span class="inline-block bg-cyan-900 text-cyan-200 text-xs px-3 py-1 rounded-full border border-cyan-700 font-mono mt-auto self-center">
-        Three.js + Tailwind
+        Three.js + Tailwind Graphics
       </span>
     </div>
 
     <div class="topic-card p-8 rounded-2xl text-center fade-up delay-400">
       <div class="topic-content">
         <h3 class="text-2xl font-bold text-cyan-400 mb-3">Juegos Web</h3>
-        <p class="text-gray-200 text-lg mb-4">Desarrollo de juegos interactivos modernos.</p>
+        <p class="text-gray-200 text-lg mb-4">Desarrollo de videojuegos y simuladores interactivos.</p>
       </div>
       <span class="inline-block bg-cyan-900 text-cyan-200 text-xs px-3 py-1 rounded-full border border-cyan-700 font-mono mt-auto self-center">
         HTML5 + CSS3 + JavaScript
@@ -312,7 +370,16 @@
   </div>
 </section>
 
-<section class="flex flex-col items-center px-4 pt-12 pb-16 relative z-10 overflow-hidden">
+<section class="flex justify-center w-full px-4 mt-8 mb-12 relative z-10 fade-up">
+  <div class="orbit-container w-48 h-48 md:w-64 md:h-64">
+    <div class="ring ring-1"><div class="neutron"></div></div>
+    <div class="ring ring-2"><div class="neutron"></div></div>
+    <div class="ring ring-3"><div class="neutron"></div></div>
+    <img src="balon.png" alt="Balón de Fútbol Tecnológico" class="relative z-10 w-full h-full rounded-full object-cover drop-shadow-[0_0_35px_rgba(0,255,255,0.8)] hover:scale-110 transition-transform duration-500" />
+  </div>
+</section>
+
+<section class="flex flex-col items-center px-4 pt-12 pb-24 relative z-10 overflow-hidden">
   <h2 class="text-3xl md:text-4xl font-bold mb-10 glow text-center fade-up">Principales prácticas y proyectos</h2>
   
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl w-full">
@@ -323,9 +390,9 @@
     </div>
 
     <div class="bg-gradient-to-b from-black/80 to-black/40 border-2 border-cyan-800/50 p-8 rounded-xl hover:border-cyan-300 hover:shadow-[0_0_30px_rgba(0,255,255,0.6),inset_0_0_15px_rgba(0,255,255,0.2)] transition-all duration-300 flex flex-col items-center text-center group fade-up delay-200">
-      <div class="text-4xl mb-4 group-hover:scale-125 transition-transform">👾</div>
-      <h3 class="text-xl text-cyan-300 font-bold mb-2">Mascota virtual</h3>
-      <p class="text-gray-400">Desarrollo del sentido de responsabilidad mediante programación de estados y necesidades.</p>
+      <div class="text-4xl mb-4 group-hover:scale-125 transition-transform">🦁</div>
+      <h3 class="text-xl text-cyan-300 font-bold mb-2">Mascota deportiva virtual</h3>
+      <p class="text-gray-400">Desarrollo del sentido de responsabilidad mediante la programación de estadísticas de rendimiento, estados y emociones de tu personaje.</p>
     </div>
 
     <div class="bg-gradient-to-b from-black/80 to-black/40 border-2 border-cyan-800/50 p-8 rounded-xl hover:border-cyan-300 hover:shadow-[0_0_30px_rgba(0,255,255,0.6),inset_0_0_15px_rgba(0,255,255,0.2)] transition-all duration-300 flex flex-col items-center text-center group fade-up delay-300">
@@ -344,7 +411,7 @@ const bgMusic = document.getElementById("bgMusic");
 const audioControl = document.getElementById("audioControl");
 let isPlaying = false;
 
-bgMusic.volume = 0.3; // Volumen suave
+bgMusic.volume = 0.3; 
 
 function updateAudioUI(playing) {
   isPlaying = playing;
@@ -359,7 +426,6 @@ function updateAudioUI(playing) {
   }
 }
 
-// Intentar reproducir automáticamente (con manejo de errores)
 function tryPlayAudio() {
   const playPromise = bgMusic.play();
   if (playPromise !== undefined) {
@@ -367,36 +433,93 @@ function tryPlayAudio() {
       updateAudioUI(true);
     }).catch(error => {
       updateAudioUI(false);
-      console.warn("Autoplay bloqueado o archivo no encontrado:", error);
+      console.warn("Autoplay restringido por políticas del navegador.");
     });
   }
 }
 
-// Iniciar al cargar
 tryPlayAudio();
 
-// Control manual del botón
 audioControl.addEventListener("click", () => {
   if (isPlaying) {
     bgMusic.pause();
     updateAudioUI(false);
   } else {
-    const playPromise = bgMusic.play();
-    if (playPromise !== undefined) {
-      playPromise.then(() => {
-        updateAudioUI(true);
-      }).catch(error => {
-        alert("🚨 No se pudo cargar el audio. Asegúrate de que el archivo 'Proulex_Academy_Sonido.mp3' esté en la misma carpeta que tu archivo HTML.");
-        updateAudioUI(false);
-      });
-    }
+    bgMusic.play().then(() => {
+      updateAudioUI(true);
+    }).catch(error => {
+      alert("🚨 Asegúrate de que el archivo 'Proulex_Academy_Sonido.mp3' esté en la misma carpeta que este HTML.");
+      updateAudioUI(false);
+    });
   }
 });
 
-// Forzar activación al primer clic en la pantalla si estaba bloqueado
 window.addEventListener('click', () => {
   if(!isPlaying) { tryPlayAudio(); }
 }, { once: true });
+
+
+/* ===========================================
+   LÓGICA DEL CARRUSEL INTERACTIVO AJUSTADO
+=========================================== */
+let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+const dots = document.querySelectorAll('.carousel-dot');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    if (i === index) {
+      slide.classList.remove('opacity-0', 'pointer-events-none');
+      slide.classList.add('opacity-100');
+      slide.querySelector('.relative').classList.remove('pointer-events-none');
+      dots[i].classList.remove('bg-white/40');
+      dots[i].classList.add('bg-white', 'scale-125', 'shadow-[0_0_10px_#00ffff]');
+    } else {
+      slide.classList.remove('opacity-100');
+      slide.classList.add('opacity-0', 'pointer-events-none');
+      slide.querySelector('.relative').classList.add('pointer-events-none');
+      dots[i].classList.remove('bg-white', 'scale-125', 'shadow-[0_0_10px_#00ffff]');
+      dots[i].classList.add('bg-white/40');
+    }
+  });
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+}
+
+function prevSlide() {
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  showSlide(currentSlide);
+}
+
+let slideInterval = setInterval(nextSlide, 5000);
+
+function resetInterval() {
+  clearInterval(slideInterval);
+  slideInterval = setInterval(nextSlide, 5000);
+}
+
+nextBtn.addEventListener('click', () => {
+  nextSlide();
+  resetInterval();
+});
+
+prevBtn.addEventListener('click', () => {
+  prevSlide();
+  resetInterval();
+});
+
+dots.forEach((dot, index) => {
+  dot.addEventListener('click', () => {
+    currentSlide = index;
+    showSlide(currentSlide);
+    resetInterval();
+  });
+});
 
 
 /* ============================
